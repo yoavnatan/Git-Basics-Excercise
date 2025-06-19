@@ -17,8 +17,9 @@ h1 {
 
     width: 100px;
     height: 100px;
-    border-radius: 50px;
+    border-radius: 50%;
     background-color: green;
+    transition: 1s ease;
 
     margin: 0 auto;
 
