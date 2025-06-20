@@ -25,3 +25,20 @@ function onSpecialBallClicked(elSpecial) {
         onBallClicked(elBalls[i], maxDiameter[i])
     }
 }
+
+function onReducerClicked(elReducer) {
+
+    const elBalls = document.querySelectorAll('.ball')
+    var randNum = getRandomInt(20, 61)
+    for (var i = 0; i < elBalls.length; i++) {
+        if (elBalls[i].offsetHeight > 100) {
+            while (elBalls[i].offsetHeight - randNum < 100) {
+                randNum = getRandomInt(0, 61)
+            }
+            elBalls[i].style.width = `${elBalls[i].offsetWidth - randNum}px`
+            elBalls[i].style.height = `${elBalls[i].offsetHeight - randNum}px`
+            elBalls[i].innerText = elBalls[i].offsetWidth - randNum
+        } else continue
+    }
+
+}
