@@ -1,10 +1,10 @@
 'use strict'
 
-function onBallClicked(elBall) {
+function onBallClicked(elBall, maxDiameter) {
     const randNum = getRandomInt(20, 61)
     const randColor = getRandomColor()
     elBall.style.backgroundColor = randColor
-    if (elBall.offsetHeight < 400 && elBall.offsetHeight + randNum < 400) {
+    if (elBall.offsetHeight < maxDiameter && elBall.offsetHeight + randNum < maxDiameter) {
         elBall.style.width = `${elBall.offsetWidth + randNum}px`
         elBall.style.height = `${elBall.offsetHeight + randNum}px`
         elBall.innerText = elBall.offsetWidth + randNum
