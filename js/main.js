@@ -42,3 +42,8 @@ function onReducerClicked(elReducer) {
     }
 
 }
+
+function onChangeColorClicked() {
+    const randColor = getRandomColor()
+    document.body.style.backgroundColor = randColor
+}
