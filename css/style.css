@@ -26,3 +26,9 @@ h1 {
     font-size: 22px;
     font-weight: bold;
 }
+
+.ball2 {
+    background-color: goldenrod;
+
+    margin-top: 20px;
+}
