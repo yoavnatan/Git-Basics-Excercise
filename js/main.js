@@ -1,5 +1,7 @@
 'use strict'
 
+const maxDiameter = [400, 300]
+
 function onBallClicked(elBall, maxDiameter) {
     const randNum = getRandomInt(20, 61)
     const randColor = getRandomColor()
@@ -15,4 +17,11 @@ function onBallClicked(elBall, maxDiameter) {
         elBall.innerText = 100
     }
 
+}
+
+function onSpecialBallClicked(elSpecial) {
+    const elBalls = document.querySelectorAll('.ball')
+    for (var i = 0; i < elBalls.length; i++) {
+        onBallClicked(elBalls[i], maxDiameter[i])
+    }
 }
