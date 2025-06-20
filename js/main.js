@@ -1,10 +1,11 @@
 'use strict'
 
 function onBallClicked(elBall) {
-    if (elBall.offsetHeight < 400) {
-        elBall.style.width = `${elBall.offsetWidth + 50}px`
-        elBall.style.height = `${elBall.offsetHeight + 50}px`
-        elBall.innerText = elBall.offsetWidth + 50
+    const randNum = getRandomInt(20, 61)
+    if (elBall.offsetHeight < 400 && elBall.offsetHeight + randNum < 400) {
+        elBall.style.width = `${elBall.offsetWidth + randNum}px`
+        elBall.style.height = `${elBall.offsetHeight + randNum}px`
+        elBall.innerText = elBall.offsetWidth + randNum
     }
     else {
         elBall.style.width = `100px`
