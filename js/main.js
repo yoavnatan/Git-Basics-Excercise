@@ -47,3 +47,12 @@ function onChangeColorClicked() {
     const randColor = getRandomColor()
     document.body.style.backgroundColor = randColor
 }
+
+function onResetClicked() {
+    const elBalls = document.querySelectorAll('.ball')
+    for (var i = 0; i < elBalls.length; i++) {
+        elBalls[i].style.width = `100px`
+        elBalls[i].style.height = `100px`
+        elBalls[i].innerText = '100'
+    }
+}
