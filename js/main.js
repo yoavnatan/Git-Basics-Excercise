@@ -1,5 +1,8 @@
 'use strict'
 
+var gTimeInterval
+var gCyclesCounter = 0
+
 const maxDiameter = [400, 300]
 
 function onBallClicked(elBall, maxDiameter) {
@@ -55,4 +58,31 @@ function onResetClicked() {
         elBalls[i].style.height = `100px`
         elBalls[i].innerText = '100'
     }
+    document.body.style.backgroundColor = 'black'
+}
+
+function onHoverReset() {
+
+    gTimeInterval = setInterval(activateAll4, 2000)
+
+}
+
+function activateAll4() {
+    if (gCyclesCounter < 10) {
+        const elBalls = document.querySelectorAll('.ball')
+        for (var i = 0; i < elBalls.length; i++) {
+            onBallClicked(elBalls[i], maxDiameter[i])
+        }
+        onSpecialBallClicked()
+        onReducerClicked()
+        gCyclesCounter++
+    } else {
+        onMouseLeaveReset()
+    }
+
+}
+
+function onMouseLeaveReset() {
+    clearInterval(gTimeInterval)
+    gCyclesCounter = 0
 }
