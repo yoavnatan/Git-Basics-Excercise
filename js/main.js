@@ -3,6 +3,47 @@
 var gTimeInterval
 var gCyclesCounter = 0
 
+var gGame = {
+    balls: [{ size: 100, color: 'green' }, { size: 100, color: 'gold' }],
+}
+
+var gHistoryGame = []
+var gHistoryUndoGame = []
+
+function onUndoClicked() {
+
+    const lastGGame = gHistoryGame.pop()
+    gGame.balls[0].size = lastGGame[0].size
+    gGame.balls[1].size = lastGGame[1].size
+    renderGame(lastGGame)
+}
+
+function onRedoClicked() {
+
+    const lastGGame = gHistoryUndoGame.pop()
+    renderGame(lastGGame)
+
+}
+
+function renderGame(lastGGame) {
+    const elBalls = document.querySelectorAll('.ball')
+    for (var i = 0; i < 2; i++) {
+        elBalls[i].style.width = `${lastGGame[i].size}px`
+        elBalls[i].style.height = `${lastGGame[i].size}px`
+    }
+    // document.body.style.backgroundColor = gGame.backgroundColor
+}
+
+function updateGameData() {
+    const elBalls = document.querySelectorAll('.ball')
+    for (var i = 0; i < 2; i++) {
+        gGame.balls[i].size = elBalls[i].offsetHeight
+        console.log('elBalls[i].offsetHeight', elBalls[i].offsetHeight)
+        gGame.balls[i].color = elBalls[i].style.color
+    }
+    gGame.backgroundColor = document.body.style.backgroundColor
+}
+
 const maxDiameter = [400, 300]
 
 function onBallClicked(elBall, maxDiameter) {
@@ -20,6 +61,19 @@ function onBallClicked(elBall, maxDiameter) {
         elBall.innerText = 100
     }
 
+    updateGameData()
+    saveGameState()
+
+
+}
+
+function saveGameState() {
+
+    const lastGameState = [
+        { size: gGame.balls[0].size },
+        { size: gGame.balls[1].size }
+    ]
+    gHistoryGame.push(lastGameState)
 }
 
 function onSpecialBallClicked(elSpecial) {
@@ -35,12 +89,14 @@ function onReducerClicked(elReducer) {
     var randNum = getRandomInt(20, 61)
     for (var i = 0; i < elBalls.length; i++) {
         if (elBalls[i].offsetHeight > 100) {
+            gHistoryGame.push(gGame)
             while (elBalls[i].offsetHeight - randNum < 100) {
                 randNum = getRandomInt(0, 61)
             }
             elBalls[i].style.width = `${elBalls[i].offsetWidth - randNum}px`
             elBalls[i].style.height = `${elBalls[i].offsetHeight - randNum}px`
             elBalls[i].innerText = elBalls[i].offsetWidth - randNum
+            updateGameData()
         } else continue
     }
 
@@ -49,6 +105,7 @@ function onReducerClicked(elReducer) {
 function onChangeColorClicked() {
     const randColor = getRandomColor()
     document.body.style.backgroundColor = randColor
+    updateGameData()
 }
 
 function onResetClicked() {
